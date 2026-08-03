@@ -200,6 +200,9 @@ def trainValidateSegmentation(args):
     args.savedir = args.savedir + '_' + args.file_root + '_iter_' + str(args.max_steps) + '_lr_' + str(args.lr) + '/'
     args.vis_dir = args.savedir + '/Vis/'
 
+    if os.environ.get('MOBILE_CDNET_DATA_ROOT'):
+        args.file_root = os.environ['MOBILE_CDNET_DATA_ROOT']
+    else:
     if args.file_root == 'LEVIR':
         args.file_root = 'H:\\penghaifeng\\LEVIR-CD'
     elif args.file_root == 'BCDD':
@@ -371,7 +374,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=5e-4, help='Initial learning rate')
     parser.add_argument('--lr_mode', default='poly', help='Learning rate policy, step or poly')
     parser.add_argument('--savedir', default='H:\\penghaifeng\\A2Net-main2\\results', help='Directory to save the results')
-    parser.add_argument('--resume', default=True, help='Use this checkpoint to continue training | '
+    parser.add_argument('--resume', default=None, help='Use this checkpoint to continue training | '
                                                        './results_ep100/checkpoint.pth.tar')
     parser.add_argument('--logFile', default='trainValLog.txt',
                         help='File that stores the training and validation logs')

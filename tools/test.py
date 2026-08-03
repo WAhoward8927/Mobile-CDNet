@@ -116,8 +116,11 @@ def ValidateSegmentation(args):
     model = BaseNet(3, 1)
 
     args.savedir = args.savedir + '_' + args.file_root + '_iter_' + str(args.max_steps) + '_lr_' + str(args.lr) + '/'
-    args.vis_dir = './snunet/' + args.file_root + '/'
+    args.vis_dir = os.path.join(args.savedir, 'Vis')
 
+    if os.environ.get('MOBILE_CDNET_DATA_ROOT'):
+        args.file_root = os.environ['MOBILE_CDNET_DATA_ROOT']
+    else:
     if args.file_root == 'LEVIR':
         args.file_root = 'H:\\penghaifeng\\LEVIR-CD'
         # args.file_root = '/home/guan/Documents/Datasets/ChangeDetection/LEVIR-CD_256_patches'

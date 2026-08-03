@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+test -n "$MOBILE_CDNET_DATA_ROOT"
+test -n "$MOBILE_CDNET_OUTPUT_ROOT"
+python tools/train.py --file_root LEVIR --savedir "$MOBILE_CDNET_OUTPUT_ROOT/results" --batch_size 16 --lr 5e-4 --max_steps 40000 --lr_mode step --step_loss 100 --num_workers 2
