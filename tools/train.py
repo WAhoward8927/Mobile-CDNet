@@ -203,17 +203,17 @@ def trainValidateSegmentation(args):
     if os.environ.get('MOBILE_CDNET_DATA_ROOT'):
         args.file_root = os.environ['MOBILE_CDNET_DATA_ROOT']
     else:
-    if args.file_root == 'LEVIR':
+      if args.file_root == 'LEVIR':
         args.file_root = 'H:\\penghaifeng\\LEVIR-CD'
-    elif args.file_root == 'BCDD':
+      elif args.file_root == 'BCDD':
         args.file_root = 'H:\\penghaifeng\\BCDD'
-    elif args.file_root == 'SYSU':
+      elif args.file_root == 'SYSU':
         args.file_root = 'H:\\penghaifeng\\SYSU-CD'
-    elif args.file_root == 'CDD':
+      elif args.file_root == 'CDD':
         args.file_root = '/home/guan/Documents/Datasets/ChangeDetection/CDD'
-    elif args.file_root == 'quick_start':
+      elif args.file_root == 'quick_start':
         args.file_root = './samples'
-    else:
+      else:
         raise TypeError('%s has not defined' % args.file_root)
 
     if not os.path.exists(args.savedir):
@@ -337,10 +337,10 @@ def trainValidateSegmentation(args):
             'F_Tr': score_tr['F1'],
             'F_val': score_val['F1'],
             'lr': lr
-        }, args.savedir + 'checkpoint.pth.tar')
+        }, os.path.join(args.savedir, 'checkpoint.pth.tar'))
 
         # save the model also
-        model_file_name = args.savedir + 'best_model.pth'
+        model_file_name = os.path.join(args.savedir, 'best_model.pth')
         if epoch % 1 == 0 and max_F1_val <= score_val['F1']:
             max_F1_val = score_val['F1']
             torch.save(model.state_dict(), model_file_name)
