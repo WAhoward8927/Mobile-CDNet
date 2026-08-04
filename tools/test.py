@@ -121,19 +121,19 @@ def ValidateSegmentation(args):
     if os.environ.get('MOBILE_CDNET_DATA_ROOT'):
         args.file_root = os.environ['MOBILE_CDNET_DATA_ROOT']
     else:
-    if args.file_root == 'LEVIR':
-        args.file_root = 'H:\\penghaifeng\\LEVIR-CD'
-        # args.file_root = '/home/guan/Documents/Datasets/ChangeDetection/LEVIR-CD_256_patches'
-    elif args.file_root == 'BCDD':
-        args.file_root = 'H:\\penghaifeng\\BCDD'
-    elif args.file_root == 'SYSU':
-        args.file_root = 'H:\\penghaifeng\\SYSU-CD'
-    elif args.file_root == 'CDD':
-        args.file_root = '/home/guan/Documents/Datasets/ChangeDetection/CDD'
-    elif args.file_root == 'testLEVIR':
-        args.file_root = '../samples'
-    else:
-        raise TypeError('%s has not defined' % args.file_root)
+        if args.file_root == 'LEVIR':
+            args.file_root = 'H:\\penghaifeng\\LEVIR-CD'
+            # args.file_root = '/home/guan/Documents/Datasets/ChangeDetection/LEVIR-CD_256_patches'
+        elif args.file_root == 'BCDD':
+            args.file_root = 'H:\\penghaifeng\\BCDD'
+        elif args.file_root == 'SYSU':
+            args.file_root = 'H:\\penghaifeng\\SYSU-CD'
+        elif args.file_root == 'CDD':
+            args.file_root = '/home/guan/Documents/Datasets/ChangeDetection/CDD'
+        elif args.file_root == 'testLEVIR':
+            args.file_root = '../samples'
+        else:
+            raise TypeError('%s has not defined' % args.file_root)
 
     if not os.path.exists(args.savedir):
         os.makedirs(args.savedir)
