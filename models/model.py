@@ -74,7 +74,7 @@ class NeighborFeatureAggregation(nn.Module):
         f4 = self.cat4(torch.cat([d4, e4], dim=1))
         e3 = F.interpolate(f4, scale_factor=(2, 2), mode='bilinear')
         f3 = self.cat3(torch.cat([d3, e3], dim=1))
-        e2 = F.interpolate(f3, scale_factor=(2, 2), mode='bilinear')
+        e2 = F.interpolate(f3, scale_factor=(2,2), mode='bilinear')
         s2 = self.cat2(torch.cat([e2, d2, d1], dim=1))
         mask = self.cls(s2)
 
