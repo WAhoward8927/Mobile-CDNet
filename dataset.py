@@ -1,4 +1,5 @@
 import cv2
+import os
 import numpy
 import torch.utils.data
 
@@ -14,8 +15,12 @@ class Dataset(torch.utils.data.Dataset):
         file_root: root of data_path, e.g. ./data/
         """
         self.file_list = open(file_root + '/' + dataset + '/list/' + dataset + '.txt').read().splitlines()
-        self.pre_images = [file_root + '/' + dataset + '/A/' + x for x in self.file_list]
-        self.post_images = [file_root + '/' + dataset + '/B/' + x for x in self.file_list]
+        pre_dir = 'A' if os.path.isdir(file_root + '/' + dataset + '/A') else 'time1'
+        post_dir = 'B' if os.path.isdir(file_root + '/' + dataset + '/B') else 'time2'
+        if not os.path.isdir(file_root + '/' + dataset + '/' + pre_dir) or not os.path.isdir(file_root + '/' + dataset + '/' + post_dir):
+            raise FileNotFoundError('Expected A/B or time1/time2 folders for ' + dataset)
+        self.pre_images = [file_root + '/' + dataset + '/' + pre_dir + '/' + x for x in self.file_list]
+        self.post_images = [file_root + '/' + dataset + '/' + post_dir + '/' + x for x in self.file_list]
         self.gts = [file_root + '/' + dataset + '/label/' + x for x in self.file_list]
         self.transform = transform
 
