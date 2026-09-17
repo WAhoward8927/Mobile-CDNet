@@ -26,7 +26,7 @@ class NeighborFeatureAggregation(nn.Module):
     def __init__(self, in_d):
         super(NeighborFeatureAggregation, self).__init__()
         self.in_d = in_d
-        self.downsample = nn.AvgPool2d(stride=2, kernel_size=2)
+        self.downsample = nn.MaxPool2d(stride=2, kernel_size=2)
 
         self.conv2d1 = nn.Sequential(
             nn.Conv2d(self.in_d[0], self.in_d[1], kernel_size=3, stride=1, padding=1),
